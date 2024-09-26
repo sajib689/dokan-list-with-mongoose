@@ -1,20 +1,49 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { user } = useContext(AuthContext);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  const links = 
-   <>
-    <Link to="/" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-    <Link to="/dokan-list" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Dokan List</Link>
-    <Link to="/addshop" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Add Shop</Link>
-    <Link to="/about" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">About</Link>
-    <Link to="/contact" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Contact Us</Link>
-  </>
+
+  const links = (
+    <>
+      <Link
+        to="/"
+        className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        Home
+      </Link>
+      <Link
+        to="/dokan-list"
+        className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        Dokan List
+      </Link>
+      <Link
+        to="/addshop"
+        className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        Add Shop
+      </Link>
+      <Link
+        to="/about"
+        className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        About
+      </Link>
+      <Link
+        to="/contact"
+        className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        Contact Us
+      </Link>
+    </>
+  );
+
   return (
     <nav className="bg-blue-900 p-4">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -25,28 +54,38 @@ const Navbar = () => {
               Logo
             </Link>
           </div>
-          
-          {/* Main menu */}
+
+          {/* Main menu (hidden on mobile) */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {links}
-              <button className="bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium">Login</button>
-            </div>
+            <div className="ml-10 flex items-baseline space-x-4">{links}</div>
           </div>
-          
+
           {/* User Profile Section */}
           <div className="hidden md:flex items-center">
-            <img
-              className="h-8 w-8 rounded-full"
-              src="https://via.placeholder.com/40"
-              alt="User Profile"
-            />
-            <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+            {user ? (
+              <>
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src={user?.photoURL}
+                  alt="User Profile"
+                />
+                <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                  Logout
+                </button>
+              </>
+            ) : (
+              <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                Login
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <button onClick={toggleMenu} className="text-white focus:outline-none">
+            <button
+              onClick={toggleMenu}
+              className="text-white focus:outline-none"
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -58,7 +97,11 @@ const Navbar = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d={!isMenuOpen ? 'M4 6h16M4 12h16m-7 6h7' : 'M6 18L18 6M6 6l12 12'}
+                  d={
+                    !isMenuOpen
+                      ? "M4 6h16M4 12h16m-7 6h7"
+                      : "M6 18L18 6M6 6l12 12"
+                  }
                 />
               </svg>
             </button>
@@ -69,16 +112,26 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col sm:px-3">
             {links}
-             <button className="bg-blue-700 text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium">Login</button>
+
             <div className="mt-2 flex items-center px-3">
-              <img
-                className="h-8 w-8 rounded-full"
-                src="https://via.placeholder.com/40"
-                alt="User Profile"
-              />
-              <button className="ml-4 bg-red-500 text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium">Logout</button>
+              {user ? (
+                <>
+                  <img
+                    className="h-12 w-12 rounded-full"
+                    src={user?.photoURL}
+                    alt="User Profile"
+                  />
+                  <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                  Login
+                </button>
+              )}
             </div>
           </div>
         </div>
