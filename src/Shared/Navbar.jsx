@@ -7,7 +7,13 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+  const links = 
+   <>
+    <Link to="/" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+    <Link href="/dokan-list" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Dokan List</Link>
+    <Link href="/about" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">About</Link>
+    <Link href="/contact" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Contact Us</Link>
+  </>
   return (
     <nav className="bg-blue-900 p-4">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -22,10 +28,7 @@ const Navbar = () => {
           {/* Main menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <a href="/" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Home</a>
-              <a href="/dokan-list" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Dokan List</a>
-              <a href="/about" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">About</a>
-              <a href="/contact" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Contact Us</a>
+              {links}
               <button className="bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium">Login</button>
             </div>
           </div>
@@ -66,11 +69,8 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/" className="text-white hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-            <a href="/dokan-list" className="text-white hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Dokan List</a>
-            <a href="/about" className="text-white hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">About</a>
-            <a href="/contact" className="text-white hover:bg-blue-700 block px-3 py-2 rounded-md text-base font-medium">Contact Us</a>
-            <button className="bg-blue-700 text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium">Login</button>
+            {links}
+             <button className="bg-blue-700 text-white block w-full text-left px-3 py-2 rounded-md text-base font-medium">Login</button>
             <div className="mt-2 flex items-center px-3">
               <img
                 className="h-8 w-8 rounded-full"
