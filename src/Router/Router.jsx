@@ -3,6 +3,7 @@ import {
   } from "react-router-dom";
 import Main from "../Main/Main";
 import Home from "../Home/Home/Home";
+import ShopOwnerForm from './../Components/OwnerShopForm';
 
   const router = createBrowserRouter([
     {
@@ -12,7 +13,11 @@ import Home from "../Home/Home/Home";
         {
         path: "/",
         element: <Home/>
-        }
+        },
+        {
+        path: "/addshop",
+        element: <ShopOwnerForm/>
+        },
       ]
     },
   ]);

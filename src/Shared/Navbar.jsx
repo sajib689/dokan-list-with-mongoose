@@ -10,9 +10,10 @@ const Navbar = () => {
   const links = 
    <>
     <Link to="/" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-    <Link href="/dokan-list" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Dokan List</Link>
-    <Link href="/about" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">About</Link>
-    <Link href="/contact" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Contact Us</Link>
+    <Link to="/dokan-list" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Dokan List</Link>
+    <Link to="/addshop" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Add Shop</Link>
+    <Link to="/about" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">About</Link>
+    <Link to="/contact" className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium">Contact Us</Link>
   </>
   return (
     <nav className="bg-blue-900 p-4">
