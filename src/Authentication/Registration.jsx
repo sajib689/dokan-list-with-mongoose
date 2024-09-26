@@ -1,8 +1,18 @@
 
 
 const Registration = () => {
+    const handleRegistration = e => {
+        e.preventDefault();
+        const form = e.target
+        const name = form.name.value
+        const email = form.email.value
+        const image = form.image.value
+        const password = form.password.value
+        
+    }
+
     return (
-        <form className="mt-12 mb-12 max-w-4xl container mx-auto">
+        <form onSubmit={handleRegistration} className="mt-12 mb-12 max-w-4xl container mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                 <label htmlFor="name" className="block font-semibold text-white mb-2">Name</label>
@@ -16,7 +26,7 @@ const Registration = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-3">
                 <div>
                 <label htmlFor="image" className="block font-semibold text-white mb-2">Image</label>
-                <input type="file" className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"  />
+                <input type="file" name="image" className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"  />
                 </div>
                 <div>
                 <label htmlFor="password" className="block font-semibold text-white mb-2">Password</label>
