@@ -7,11 +7,11 @@ import { RouterProvider } from 'react-router-dom'
 import router from './Router/Router';
 
 createRoot(document.getElementById('root')).render(
-  <>
+  <div className='bg-blue-900'>
     <AuthProvider>
       <RouterProvider router={router}>
         <Main/>
       </RouterProvider>
     </AuthProvider>
-  </>,
+  </div>,
 )

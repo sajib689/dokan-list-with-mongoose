@@ -4,6 +4,8 @@ import {
 import Main from "../Main/Main";
 import Home from "../Home/Home/Home";
 import ShopOwnerForm from './../Components/OwnerShopForm';
+import Registration from "../Authentication/Registration";
+import Login from "../Authentication/Login";
 
   const router = createBrowserRouter([
     {
@@ -17,6 +19,14 @@ import ShopOwnerForm from './../Components/OwnerShopForm';
         {
         path: "/addshop",
         element: <ShopOwnerForm/>
+        },
+        {
+        path: "/registration",
+        element: <Registration/>
+        },
+        {
+        path: "/login",
+        element: <Login/>
         },
       ]
     },

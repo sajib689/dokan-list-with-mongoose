@@ -1,10 +1,11 @@
+import Login from "../../Authentication/Login";
 import Registration from "../../Authentication/Registration";
 
 
 const Home = () => {
     return (
         <div>
-            <Registration/>
+            <Login/>
         </div>
     );
 };
