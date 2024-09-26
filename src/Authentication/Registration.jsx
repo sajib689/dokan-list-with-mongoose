@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { AuthContext } from "../Provider/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 
 const Registration = () => {
+    const {createAccount} = useContext(AuthContext)
     const handleRegistration = e => {
         e.preventDefault();
         const form = e.target
@@ -8,7 +12,17 @@ const Registration = () => {
         const email = form.email.value
         const image = form.image.value
         const password = form.password.value
-        
+        createAccount(email, password)
+        .then(result => {
+            const user = result.user
+            updateProfile(user, {
+                displayName: name,
+
+            })
+        })
+        .catch(error => {
+            console.error(error)
+        })
     }
 
     return (
