@@ -4,11 +4,13 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user,logOut,loading } = useContext(AuthContext);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
+  const handleLogout = () => {
+    logOut()
+  }
   const links = (
     <>
       <Link
@@ -69,14 +71,14 @@ const Navbar = () => {
                   src={user?.photoURL}
                   alt="User Profile"
                 />
-                <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                <button onClick={handleLogout} className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
                   Logout
                 </button>
               </>
             ) : (
-              <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+              <Link to='/login' className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
                 Login
-              </button>
+              </Link>
             )}
           </div>
 
@@ -123,14 +125,14 @@ const Navbar = () => {
                     src={user?.photoURL}
                     alt="User Profile"
                   />
-                  <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                  <button onClick={handleLogout} className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
                     Logout
                   </button>
                 </>
               ) : (
-                <button className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
+                <Link to='/login' className="ml-4 text-white bg-red-500 hover:bg-red-700 px-3 py-2 rounded-md text-sm font-medium">
                   Login
-                </button>
+                </Link>
               )}
             </div>
           </div>
