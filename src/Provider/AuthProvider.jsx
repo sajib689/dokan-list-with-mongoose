@@ -19,9 +19,12 @@ const AuthProvider = ({children}) => {
     }
     const googleLogin = () => {
         setLoading(true)
-        return signInWithPopup(auth)
+        return signInWithPopup(auth, googleProvider)
     }
-
+    const gitHubLogin = () => {
+        setLoading(true)
+        return signInWithPopup(auth, gitHubProvider)
+    }
     useEffect( () => {
      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
@@ -36,7 +39,9 @@ const AuthProvider = ({children}) => {
         user,
         loading,
         createAccount,
-        login
+        login,
+        googleLogin,
+        gitHubLogin
     }
     return (
         <AuthContext.Provider value={authInfo}>
