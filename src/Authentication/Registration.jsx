@@ -23,7 +23,7 @@ const Registration = () => {
                 <input className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" type="email" name="email" id="" placeholder="Enter Your Password" />
                 </div>
             </div>
-            
+            <button className="btn mt-3 bg-blue-600 text-white">Registration</button>
         </form>
     );
 };
