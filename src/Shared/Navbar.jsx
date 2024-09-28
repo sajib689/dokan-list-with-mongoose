@@ -21,10 +21,10 @@ const Navbar = () => {
         Home
       </Link>
       <Link
-        to="/dokan-list"
+        to="/shops"
         className="text-white hover:bg-blue-700 px-3 py-2 rounded-md text-sm font-medium"
       >
-        Dokan List
+        All Shop
       </Link>
       <Link
         to="/addshop"

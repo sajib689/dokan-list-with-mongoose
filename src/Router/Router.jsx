@@ -6,6 +6,7 @@ import Home from "../Home/Home/Home";
 import ShopOwnerForm from './../Components/OwnerShopForm';
 import Registration from "../Authentication/Registration";
 import Login from "../Authentication/Login";
+import DokanList from "../Components/DokanList";
 
   const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ import Login from "../Authentication/Login";
         {
         path: "/login",
         element: <Login/>
+        },
+        {
+        path: "/shops",
+        element: <DokanList/>
         },
       ]
     },
