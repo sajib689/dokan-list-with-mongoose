@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
-import Swal from "sweetalert2"; // Make sure you have imported Swal
+import Swal from "sweetalert2"; 
 
 const Login = () => {
   const { login } = useContext(AuthContext);
