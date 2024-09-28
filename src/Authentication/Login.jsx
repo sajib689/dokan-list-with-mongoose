@@ -1,8 +1,32 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
+    const {login} = useContext(AuthContext)
+    const handleLogin = e => {
+        e.preventDefault()
+        const form = e.target
+        const email = form.email.value
+        const password = form.password.value
+        login(email, password)
+        .then(result => {
+            const user = result.user
+            if(user) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Login Success",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
+        })
+        form.reset()
+        .catch(error => console.log(error))
+    }
   return (
-    <form className="mt-12 mb-12 max-w-sm p-3  container mx-auto">
+    <form onSubmit={handleLogin} className="mt-12 mb-12 max-w-sm p-3  container mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-1 gap-6">
         <div>
           <label
@@ -28,8 +52,8 @@ const Login = () => {
           </label>
           <input
             className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            type="email"
-            name="email"
+            type="password"
+            name="password"
             id=""
             placeholder="Enter Your Password"
           />

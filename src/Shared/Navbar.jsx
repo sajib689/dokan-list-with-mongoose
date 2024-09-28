@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import Loading from "../Utlitis/Loading";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,7 +46,7 @@ const Navbar = () => {
       </Link>
     </>
   );
-
+  // if(loading) return <Loading/>
   return (
     <nav className="bg-blue-900 p-4">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
