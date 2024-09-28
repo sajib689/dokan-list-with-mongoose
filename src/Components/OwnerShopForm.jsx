@@ -1,9 +1,12 @@
+import axios from "axios";
 import React from "react";
-
+const image_send_api = import.meta.env.VITE_IMAGE_API
+const image_send_api_url = `https://api.imgbb.com/1/upload?key=${image_send_api}`;
 const ShopOwnerForm = () => {
-  const handleAddShop = (e) => {
+  const handleAddShop = async (e) => {
     e.preventDefault();
     const form = e.target;
+
     const shopName = form.shopName.value;
     const ownerName = form.ownerName.value;
     const ownerFatherName = form.ownerFatherName.value;
@@ -11,37 +14,59 @@ const ShopOwnerForm = () => {
     const ownerIdNumber = form.ownerIdNumber.value;
     const ownerAddress = form.ownerAddress.value;
     const ownerBloodGroup = form.ownerBloodGroup.value;
-    const ownerDuty = form.ownerDuty.value;
+    const ownerDuty = form.ownerDuty.checked;
     const ownerPhoneNumber = form.ownerPhoneNumber.value;
-    const ownerPhoto = form.ownerPhoto.value;
-    const ownerShopPhoto = form.ownerShopPhoto.value;
-    const dokan = {
-      shopName,
-      ownerName,
-      ownerFatherName,
-      ownerMotherName,
-      ownerIdNumber,
-      ownerAddress,
-      ownerBloodGroup,
-      ownerDuty,
-      ownerPhoneNumber,
-      ownerPhoto,
-      ownerShopPhoto,
-    };
-    fetch("http://localhost:3000/dokan", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(dokan),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+    const ownerPhoto1 = form.ownerPhoto.files[0];
+    const ownerShopPhoto2 = form.ownerShopPhoto.files[0];
+
+    // Create form data for owner photo
+    const formDataOwnerPhoto = new FormData();
+    formDataOwnerPhoto.append("image", ownerPhoto1);
+
+    // Create form data for shop photo
+    const formDataShopPhoto = new FormData();
+    formDataShopPhoto.append("image", ownerShopPhoto2);
+
+    try {
+      // Upload the owner photo
+      const resOwnerPhoto = await axios.post(image_send_api_url, formDataOwnerPhoto);
+      const ownerPhoto = resOwnerPhoto.data.data.display_url;
+
+      // Upload the shop photo
+      const resShopPhoto = await axios.post(image_send_api_url, formDataShopPhoto);
+      const ownerShopPhoto = resShopPhoto.data.data.display_url;
+
+      const dokan = {
+        shopName,
+        ownerName,
+        ownerFatherName,
+        ownerMotherName,
+        ownerIdNumber,
+        ownerAddress,
+        ownerBloodGroup,
+        ownerDuty,
+        ownerPhoneNumber,
+        ownerPhoto,
+        ownerShopPhoto,
+      };
+
+      // Send the final data to your server
+      const response = await fetch("http://localhost:3000/dokan", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dokan),
       });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error uploading images or sending data:", error.message);
+    }
   };
   return (
-    <form className="mb-24 mt-12 max-w-6xl mx-auto p-8  shadow-lg rounded-lg space-y-6">
+    <form onSubmit={handleAddShop} className="mb-24 mt-12 max-w-6xl mx-auto p-8  shadow-lg rounded-lg space-y-6">
       <h2 className="text-3xl font-extrabold mb-12 text-start text-white">
         Shop Owner Form
       </h2>
