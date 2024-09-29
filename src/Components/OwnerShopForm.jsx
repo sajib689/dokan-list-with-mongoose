@@ -61,7 +61,7 @@ const ShopOwnerForm = () => {
       };
 
       // Send the final data to your server
-      const response = await fetch("http://localhost:3000/dokan", {
+      const response = await fetch("https://dokan-list-server.vercel.app/dokan", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

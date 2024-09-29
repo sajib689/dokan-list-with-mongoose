@@ -69,12 +69,12 @@ const Login = () => {
             name="password"
             placeholder="Enter Your Password"
           />
-          <p className="text-white mt-1">
+          {/* <p className="text-white mt-1">
             Are you have an{" "}
             <Link to="/registration" className="underline">
               account?
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
       <button className="btn w-full mt-3 bg-blue-600 text-white hover:bg-blue-700 border-0">

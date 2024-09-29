@@ -7,7 +7,7 @@ const DokanList = () => {
   const { data = [], isLoading, isError, refetch } = useQuery({
     queryKey: ['dokan'],
     queryFn: async () => {
-      const res = await axios.get('http://localhost:3000/dokan');
+      const res = await axios.get('https://dokan-list-server.vercel.app/dokan');
     
       return res.data.dokan; 
     },
@@ -15,7 +15,7 @@ const DokanList = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:3000/dokan/${id}`);
+      const res = await axios.delete(`https://dokan-list-server.vercel.app/dokan/${id}`);
       
       if (res.status === 200) {
         Swal.fire({
