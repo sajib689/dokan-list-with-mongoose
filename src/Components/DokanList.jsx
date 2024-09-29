@@ -53,6 +53,7 @@ const DokanList = () => {
         <table className="table-auto w-full text-left bg-white shadow-lg rounded-lg">
           <thead className="bg-blue-500 text-white">
             <tr>
+              <th className="px-4 py-2">No</th>
               <th className="px-4 py-2">Shop Name</th>
               <th className="px-4 py-2">Owner Name</th>
               <th className="px-4 py-2">Father's Name</th>
@@ -68,8 +69,9 @@ const DokanList = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((dokan) => (
+            {data.map((dokan, index) => (
               <tr key={dokan?._id} className="border-b border-gray-200 hover:bg-gray-100">
+                <td className="px-4 py-2">{index + 1}</td>
                 <td className="px-4 py-2">{dokan?.shopName}</td>
                 <td className="px-4 py-2">{dokan?.ownerName}</td>
                 <td className="px-4 py-2">{dokan?.ownerFatherName}</td>
