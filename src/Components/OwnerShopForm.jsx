@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import Swal from "sweetalert2";
 const image_send_api = import.meta.env.VITE_IMAGE_API
 const image_send_api_url = `https://api.imgbb.com/1/upload?key=${image_send_api}`;
 const ShopOwnerForm = () => {
@@ -18,6 +19,15 @@ const ShopOwnerForm = () => {
     const ownerPhoneNumber = form.ownerPhoneNumber.value;
     const ownerPhoto1 = form.ownerPhoto.files[0];
     const ownerShopPhoto2 = form.ownerShopPhoto.files[0];
+
+    if (!shopName || !ownerName || !ownerPhoto1 || !ownerShopPhoto2) {
+      Swal.fire({
+        icon: "error",
+        title: "Validation Error",
+        text: "Please fill all required fields and upload both photos.",
+      });
+      return;
+    }
 
     // Create form data for owner photo
     const formDataOwnerPhoto = new FormData();
@@ -60,18 +70,23 @@ const ShopOwnerForm = () => {
       });
 
       const data = await response.json();
-      if(data) {
+      if (data) {
         Swal.fire({
           position: "top-center",
           icon: "success",
-          title: "Shop Added Success",
+          title: "Shop Added Successfully",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
+        form.reset();
       }
-      form.reset()
     } catch (error) {
       console.error("Error uploading images or sending data:", error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text: "There was an error uploading images or submitting data.",
+      });
     }
   };
   return (

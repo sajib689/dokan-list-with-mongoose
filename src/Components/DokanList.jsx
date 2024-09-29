@@ -1,30 +1,43 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const DokanList = () => {
   const { data = [], isLoading, isError, refetch } = useQuery({
     queryKey: ['dokan'],
     queryFn: async () => {
       const res = await axios.get('http://localhost:3000/dokan');
-      console.log('Response Data:', res.data);
+    
       return res.data.dokan; 
     },
   });
+
   const handleDelete = async (id) => {
-    const res = await axios.delete(`http://localhost:3000/dokan/${id}`)
-   
-    if(res.data.statusCode === 200) {
+    try {
+      const res = await axios.delete(`http://localhost:3000/dokan/${id}`);
+      
+      if (res.status === 200) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Delete Success",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        refetch();  
+      }
+    } catch (error) {
+      console.error(error);
       Swal.fire({
         position: "top-center",
-        icon: "success",
-        title: "Delete Success",
-        showConfirmButton: false,
-        timer: 1500
+        icon: "error",
+        title: "Delete Failed",
+        text: "Something went wrong!",
+        showConfirmButton: true,
       });
     }
-    refetch()
-  }
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading data.</div>;
@@ -36,7 +49,7 @@ const DokanList = () => {
       <h2 className="text-3xl font-bold mb-8 text-white">Shop List</h2>
 
       {/* Add overflow auto for responsive scrolling */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto  rounded-lg">
         <table className="table-auto w-full text-left bg-white shadow-lg rounded-lg">
           <thead className="bg-blue-500 text-white">
             <tr>
@@ -83,7 +96,7 @@ const DokanList = () => {
                     Edit
                   </button>
                   <button
-                  onClick={() => handleDelete(dokan?._id)}
+                    onClick={() => handleDelete(dokan?._id)}
                     className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                   >
                     Delete
