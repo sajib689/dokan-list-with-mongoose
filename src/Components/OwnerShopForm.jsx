@@ -60,7 +60,16 @@ const ShopOwnerForm = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+      if(data) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Shop Added Success",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+      form.reset()
     } catch (error) {
       console.error("Error uploading images or sending data:", error.message);
     }

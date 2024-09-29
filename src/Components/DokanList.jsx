@@ -11,6 +11,20 @@ const DokanList = () => {
       return res.data.dokan; 
     },
   });
+  const handleDelete = async (id) => {
+    const res = await axios.delete(`http://localhost:3000/dokan/${id}`)
+   
+    if(res.data.statusCode === 200) {
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Delete Success",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+    refetch()
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading data.</div>;
@@ -69,6 +83,7 @@ const DokanList = () => {
                     Edit
                   </button>
                   <button
+                  onClick={() => handleDelete(dokan?._id)}
                     className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                   >
                     Delete
